@@ -16,4 +16,30 @@
 	.answer-area {
 		width: 100%;
 	}
+
+	.home section .graphic {
+		width: 100%;
+		height: 100%;
+	}
+	header {
+		padding: 0.8rem 2rem;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	footer {
+		flex-direction: column;
+		width: 100vw;
+	}
+	footer p,
+	footer a {
+		margin: 10px 0;
+		text-align: center;
+	}
+	h1 {
+		font-size: 2.2em;
+	}
+	h2 {
+		font-size: 1.4em;
+	}
 }
