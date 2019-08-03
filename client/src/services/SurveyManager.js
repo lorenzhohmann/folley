@@ -8,5 +8,13 @@ export default {
 	},
 	getSurvey(uuid) {
 		return axios.get(url + uuid).then(response => response.data);
+	},
+	vote(uuid, answers) {
+		return axios
+			.post(url + uuid, { answers })
+			.then(response => response.data);
+	},
+	getVotes(uuid) {
+		return axios.get(url + uuid + '/votes').then(response => response.data);
 	}
 };

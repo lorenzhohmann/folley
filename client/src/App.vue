@@ -41,6 +41,7 @@ header {
     opacity: 0.8;
     transition: 0.2s ease all;
     cursor: pointer;
+    color: var(--main-color);
 
     &:hover {
       opacity: 1;

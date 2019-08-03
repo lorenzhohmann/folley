@@ -6,5 +6,13 @@
 	"question": "Ask your question",
 	"answer": "Answer",
 	"add_answer": "Add answer option",
-	"remove_answer": "Remove answer"
+	"remove_answer": "Remove answer",
+	"alert": {
+		"no_question": "Please enter a question!",
+		"no_answers": "At least two answers must be available!",
+		"survey_created": "The survey has been created!",
+		"min_one_answer": "Please select at least one answer!",
+		"vote_success": "You voted successfully!",
+		"default_error": "Error! Please try again in a few minutes!"
+	}
 }

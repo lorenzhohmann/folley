@@ -5,7 +5,7 @@ const db = require('../lib/db.js');
 
 router.get('/survey/:uuid', (req, res) => {
 	db.query(
-		`SELECT * FROM surveys s JOIN answers a ON s.id = a.survey_id WHERE s.id = '${req.params.uuid}'`,
+		`SELECT *, DATE_FORMAT(s.created, '%d.%m.%Y') as created_date, DATE_FORMAT(s.created, '%H:%i') as created_time FROM surveys s JOIN answers a ON s.id = a.survey_id WHERE s.id = '${req.params.uuid}'`,
 		(err, result) => {
 			if (err) {
 				throw err;
@@ -16,7 +16,9 @@ router.get('/survey/:uuid', (req, res) => {
 
 			const survey = {
 				question: result[0].question,
-				answers: []
+				answers: [],
+				created_date: result[0].created_date,
+				created_time: result[0].created_time
 			};
 
 			for (let i = 0; i < result.length; i++) {
@@ -80,6 +82,29 @@ router.post('/survey', (req, res) => {
 	res.status(200).send({
 		uuid: newUuid
 	});
+});
+
+router.get('/survey/:surveyID/votes', (req, res) => {
+	const surveyID = req.params.surveyID;
+
+	db.query(
+		`SELECT a.id, answer, COUNT(v.id) votes FROM answers a JOIN surveys s ON a.survey_id = s.id JOIN votes v ON v.answer_id = a.id WHERE s.id = '${surveyID}' GROUP BY a.id`,
+		(err, result) => {
+			res.status(200).send(result);
+		}
+	);
+});
+
+router.post('/survey/:surveyID', (req, res) => {
+	const answers = req.body.answers;
+
+	for (let i = 0; i < answers.length; i++) {
+		db.query(
+			`INSERT INTO votes (ip, answer_id) VALUES ('xxx.xxx.xxx.xxx', ${answers[i]})`
+		);
+	}
+
+	res.status(200).send();
 });
 
 module.exports = router;

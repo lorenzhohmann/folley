@@ -6,5 +6,13 @@
 	"question": "Stelle Deine Frage",
 	"answer": "Antwort",
 	"add_answer": "Antwortmöglichkeit hinzufügen",
-	"remove_answer": "Antwort entfernen"
+	"remove_answer": "Antwort entfernen",
+	"alerts": {
+		"no_question": "Bitte gebe eine Frage ein!",
+		"no_answers": "Es müssen mindestens zwei Antworten vorhanden sein!",
+		"survey_created": "Die Umfrage wurde erstellt!",
+		"min_one_answer": "Bitte wähle mindestens eine Antwort aus!",
+		"vote_success": "Du hast erfolgreich abgestimmt!",
+		"default_error": "Fehler! Bitte versuche es in ein paar Minuten erneut!"
+	}
 }

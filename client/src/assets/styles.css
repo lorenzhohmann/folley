@@ -19,8 +19,13 @@ body {
 	--main-color: #77ba37;
 	--grey: #2d2d2d;
 	--lighter-grey: #737373;
+	--light-grey: #f1f1f1;
 	--red: #a2402e;
 	--dark-red: #a03623;
+}
+
+p {
+	color: var(--grey);
 }
 
 h1 {
@@ -31,6 +36,24 @@ h1 {
 h2 {
 	color: var(--lighter-grey);
 	font-size: 2.6em;
+}
+
+h3 {
+	color: var(--lighter-grey);
+	font-size: 1.6em;
+}
+
+.color-light-grey {
+	color: var(--lighter-grey);
+}
+
+.alert {
+	color: var(--lighter-grey);
+	margin-left: 1rem;
+}
+
+.alert.red {
+	color: var(--red);
 }
 
 .btn {
@@ -77,6 +100,7 @@ h2 {
 .container {
 	width: 1200px;
 	margin: 0 auto;
+	min-height: 75vh;
 }
 
 input {
@@ -94,6 +118,33 @@ input:focus {
 	border-bottom: 2px solid var(--main-color);
 }
 
+label {
+	color: var(--grey);
+}
+
+input[type='checkbox'] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	border: 2px solid var(--lighter-grey);
+
+	padding: 3px;
+	position: relative;
+}
+
+input[type='checkbox']:checked::after {
+	content: '';
+	width: 10px;
+	height: 10px;
+	background-color: var(--main-color);
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
 select {
 	-moz-appearance: none;
 	-webkit-appearance: none;
@@ -109,9 +160,6 @@ select {
 footer {
 	display: flex;
 	justify-content: center;
-	position: fixed;
-	bottom: 0;
-	left: 0;
 	width: 100%;
 	background-color: #fff;
 }

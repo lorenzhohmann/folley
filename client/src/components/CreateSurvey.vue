@@ -33,9 +33,20 @@
 			>
 		</div>
 
-		<div class="btn small" @click="createSurvey">
+		<span class="btn small" @click="createSurvey">
 			{{ $t('create_survey') }}
-		</div>
+		</span>
+
+		<span
+			class="alert"
+			v-bind:class="{
+				red: alert.colorClass == 'red',
+				green: alert.colorClass == 'green'
+			}"
+			v-if="alert"
+		>
+			{{ $t(alert.msg) }}
+		</span>
 	</div>
 </template>
 
@@ -48,7 +59,8 @@ export default {
 		return {
 			question: '',
 			answerCount: 2,
-			answers: []
+			answers: [],
+			alert: []
 		};
 	},
 	methods: {
@@ -60,18 +72,19 @@ export default {
 
 			try {
 				const response = await SurveyManager.createSurvey(data);
-				this.$router.push({ path: `/survey/${response['uuid']}` });
+				this.setAlert('alerts.survey_created');
+				this.$router.push(
+					`${this.$i18n.locale}/survey/${response['uuid']}`
+				);
 			} catch (err) {
 				const errorCode = err.response.data.code;
 
 				switch (errorCode) {
 					case 'no-question':
-						alert('Bitte gebe eine Frage ein!');
+						this.setAlert('alerts.no_question', 'red');
 						break;
 					case 'no-answers':
-						alert(
-							'Es müssen mindestens zwei Antworten vorhanden sein'
-						);
+						this.setAlert('alerts.no_answers', 'red');
 						break;
 				}
 			}
@@ -82,6 +95,16 @@ export default {
 		removeAnswer: function(id) {
 			this.answers = this.answers.filter((answer, index) => index !== id);
 			this.answerCount--;
+		},
+		setAlert: function(msg, colorClass = '') {
+			const newAlert = {
+				msg,
+				colorClass
+			};
+			this.alert = newAlert;
+		},
+		removeAlert: function() {
+			this.alert = [];
 		}
 	}
 };
@@ -109,10 +132,6 @@ h2 {
 		&:hover {
 			color: var(--red);
 		}
-	}
-
-	label {
-		color: var(--grey);
 	}
 
 	input {
