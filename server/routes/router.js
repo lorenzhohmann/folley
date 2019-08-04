@@ -3,6 +3,24 @@ const router = express.Router();
 const uuid = require('uuid');
 const db = require('../lib/db.js');
 
+router.get('/survey', (req, res) => {
+	db.query(
+		'SELECT *, DATE_FORMAT(s.created, "%d.%m.%Y") as created_date, DATE_FORMAT(s.created, "%H:%i") as created_time FROM surveys s JOIN answers a ON s.id = a.survey_id GROUP BY s.id ORDER BY created DESC LIMIT 5',
+		(err, result) => {
+			if (err) {
+				throw err;
+				res.status(404).send({
+					code: 'unknown'
+				});
+			}
+
+			console.log(result);
+
+			res.status(200).send(result);
+		}
+	);
+});
+
 router.get('/survey/:uuid', (req, res) => {
 	db.query(
 		`SELECT *, DATE_FORMAT(s.created, '%d.%m.%Y') as created_date, DATE_FORMAT(s.created, '%H:%i') as created_time FROM surveys s JOIN answers a ON s.id = a.survey_id WHERE s.id = '${req.params.uuid}'`,

@@ -1,8 +1,8 @@
 <template>
 	<div class="survey-view">
 		<h3>
-			Erstellt am {{ survey.created_date }} um
-			{{ survey.created_time }} Uhr
+			{{ $t('created') }} {{ survey.created_date }} {{ $t('at') }}
+			{{ survey.created_time }} {{ $t('clock') }}
 		</h3>
 		<div class="answer-container">
 			<div class="row" v-for="answer in survey.answers">
@@ -17,23 +17,27 @@
 				}}</label>
 			</div>
 		</div>
-		<span class="btn small" @click="vote">Abstimmen</span>
-		<span
-			class="alert"
-			v-bind:class="{
-				red: alert.colorClass == 'red',
-				green: alert.colorClass == 'green'
-			}"
-			v-if="alert"
-		>
-			{{ $t(alert.msg) }}
-		</span>
-		<p
-			class="color-light-grey change-view"
-			@click="$emit('change-view', 'results')"
-		>
-			Ergebnisse anschauen
-		</p>
+		<div class="action-container">
+			<div class="btn-container">
+				<span class="btn small" @click="vote">{{ $t('vote') }}</span>
+				<p
+					class="color-light-grey change-view"
+					@click="$emit('change-view', 'results')"
+				>
+					{{ $t('view_results') }}
+				</p>
+			</div>
+			<span
+				class="alert"
+				v-bind:class="{
+					red: alert.colorClass == 'red',
+					green: alert.colorClass == 'green'
+				}"
+				v-if="alert"
+			>
+				{{ $t(alert.msg) }}
+			</span>
+		</div>
 	</div>
 </template>
 <script>
@@ -54,6 +58,10 @@ export default {
 				this.setAlert('alerts.min_one_answer', 'red');
 				return false;
 			}
+			if (this.getCookie('voted-' + this.uuid) === 'true') {
+				this.setAlert('alerts.already_voted', 'red');
+				return false;
+			}
 
 			try {
 				const response = await SurveyManager.vote(
@@ -61,6 +69,7 @@ export default {
 					this.checkedAnswers
 				);
 				this.setAlert('alerts.vote_success');
+				this.setCookie('voted-' + this.uuid, 'true', 1);
 
 				var th = this;
 				setTimeout(function() {
@@ -69,6 +78,27 @@ export default {
 			} catch (err) {
 				this.setAlert('alerts.default_error', 'red');
 			}
+		},
+		setCookie: function(cname, cvalue, exdays) {
+			var d = new Date();
+			d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+			var expires = 'expires=' + d.toUTCString();
+			document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
+		},
+		getCookie: function(cname) {
+			var name = cname + '=';
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var ca = decodedCookie.split(';');
+			for (var i = 0; i < ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length, c.length);
+				}
+			}
+			return '';
 		},
 		setAlert: function(msg, colorClass = '') {
 			const newAlert = {

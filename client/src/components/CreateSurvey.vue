@@ -31,6 +31,19 @@
 				v-if="answerCount < 50"
 				>+</span
 			>
+			<div class="option-container">
+				<div class="row">
+					<input
+						type="checkbox"
+						id="option-multiple-choices"
+						checked
+						disabled
+					/>
+					<label for="option-multiple-choices">{{
+						$t('allow_multiple_choices')
+					}}</label>
+				</div>
+			</div>
 		</div>
 
 		<span class="btn small" @click="createSurvey">
@@ -142,6 +155,19 @@ h2 {
 		&:hover,
 		&:focus {
 			border: 2px solid var(--main-color);
+		}
+	}
+}
+
+.option-container {
+	margin-top: 3rem;
+
+	.row {
+		display: flex;
+		margin: 1rem 0;
+
+		label {
+			margin-left: 0.5rem;
 		}
 	}
 }

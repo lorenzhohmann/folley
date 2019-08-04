@@ -7,12 +7,28 @@
 	"answer": "Antwort",
 	"add_answer": "Antwortmöglichkeit hinzufügen",
 	"remove_answer": "Antwort entfernen",
+	"no_surveys": "Es sind keine Umfragen vorhanden.",
+	"latest_surveys": "Letzte Umfragen",
+	"created": "Erstellt am",
+	"at": "um",
+	"result": "Ergebnis",
+	"refresh_result": "Ergebnis aktualisieren",
+	"votes": "Votes",
+	"to_survey": "zur Umfrage",
+	"clock": "Uhr",
+	"vote": "Abstimmen",
+	"view_results": "Ergebnis anschauen",
+	"imprint": "Impressum",
+	"data_privacy": "Datenschutzerklärung",
+	"blog": "Blog",
+	"allow_multiple_choices": "Mehrfach-Auswahl erlauben",
 	"alerts": {
 		"no_question": "Bitte gebe eine Frage ein!",
 		"no_answers": "Es müssen mindestens zwei Antworten vorhanden sein!",
 		"survey_created": "Die Umfrage wurde erstellt!",
 		"min_one_answer": "Bitte wähle mindestens eine Antwort aus!",
 		"vote_success": "Du hast erfolgreich abgestimmt!",
-		"default_error": "Fehler! Bitte versuche es in ein paar Minuten erneut!"
+		"default_error": "Fehler! Bitte versuche es in ein paar Minuten erneut!",
+		"already_voted": "Du hast bereits abgestimmt!"
 	}
 }

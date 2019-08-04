@@ -7,12 +7,28 @@
 	"answer": "Answer",
 	"add_answer": "Add answer option",
 	"remove_answer": "Remove answer",
-	"alert": {
+	"no_surveys": "There are no surveys available.",
+	"latest_surveys": "Latest surveys",
+	"created": "Created on",
+	"at": "at",
+	"result": "Result",
+	"refresh_result": "Refresh result",
+	"votes": "votes",
+	"to_survey": "To the survey",
+	"clock": "o'clock",
+	"vote": "Vote",
+	"view_results": "View result",
+	"imprint": "Imprint",
+	"data_privacy": "Privacy",
+	"blog": "Blog",
+	"allow_multiple_choices": "Allow multiple selection",
+	"alerts": {
 		"no_question": "Please enter a question!",
 		"no_answers": "At least two answers must be available!",
 		"survey_created": "The survey has been created!",
 		"min_one_answer": "Please select at least one answer!",
 		"vote_success": "You voted successfully!",
-		"default_error": "Error! Please try again in a few minutes!"
+		"default_error": "Error! Please try again in a few minutes!",
+		"already_voted": "You already voted!"
 	}
 }

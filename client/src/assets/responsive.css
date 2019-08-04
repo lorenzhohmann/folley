@@ -24,6 +24,16 @@
 	header {
 		padding: 0.8rem 2rem;
 	}
+	.alert {
+		display: block;
+		margin: 2rem 0;
+	}
+	.action-container {
+		flex-direction: column;
+	}
+	.home section:first-child {
+		height: 70vh;
+	}
 }
 
 @media screen and (max-width: 480px) {

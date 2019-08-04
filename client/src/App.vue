@@ -10,9 +10,19 @@
     <router-view />
 
     <footer>
-      <p>Impressum</p>
-      <p>Datenschutzerklärung</p>
-      <p><a href="https://webdeasy.de/" target="_blank">Blog</a></p>
+      <p>
+        <a href="https://webdeasy.de/impressum/" target="_blank">{{
+          $t('imprint')
+        }}</a>
+      </p>
+      <p>
+        <a href="https://webdeasy.de/datenschutzerklaerung/" target="_blank">{{
+          $t('data_privacy')
+        }}</a>
+      </p>
+      <p>
+        <a href="https://webdeasy.de/" target="_blank">{{ $t('blog') }}</a>
+      </p>
     </footer>
   </div>
 </template>

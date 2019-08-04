@@ -56,6 +56,13 @@ h3 {
 	color: var(--red);
 }
 
+.action-container {
+	display: flex;
+}
+.action-container .alert {
+	margin-top: 1rem;
+}
+
 .btn {
 	background-color: var(--main-color);
 	color: #fff;
@@ -143,6 +150,10 @@ input[type='checkbox']:checked::after {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+}
+
+input[type='checkbox']:disabled::after {
+	background-color: var(--lighter-grey);
 }
 
 select {

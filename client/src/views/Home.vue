@@ -9,8 +9,11 @@
 					{{ $t('create_survey') }}
 				</a>
 			</section>
-			<section>
+			<section class="auto-margin">
 				<CreateSurvey />
+			</section>
+			<section class="auto-margin">
+				<SurveyList />
 			</section>
 		</div>
 	</div>
@@ -18,11 +21,13 @@
 
 <script>
 import CreateSurvey from '@/components/CreateSurvey.vue';
+import SurveyList from '@/components/SurveyList.vue';
 
 export default {
 	name: 'Home',
 	components: {
-		CreateSurvey
+		CreateSurvey,
+		SurveyList
 	}
 };
 </script>
@@ -30,9 +35,12 @@ export default {
 <style lang="scss">
 .home {
 	section {
-		height: 90vh;
+		&.auto-margin {
+			margin: 10rem 0;
+		}
 
 		&:first-child {
+			height: 90vh;
 			display: flex;
 			justify-content: center;
 			align-items: center;

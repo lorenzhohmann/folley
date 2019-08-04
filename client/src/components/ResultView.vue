@@ -1,12 +1,12 @@
 <template>
 	<div class="result-view">
-		<h2>Ergebnisse - {{ totalVotes }} Votes</h2>
+		<h2>{{ $t('result') }} - {{ totalVotes }} {{ $t('votes') }}</h2>
 
 		<div class="vote-results">
 			<div class="answer" v-for="vote in votes">
 				<p>
 					<b>{{ vote.answer }}</b
-					>: {{ vote.votes }} Votes
+					>: {{ vote.votes }} {{ $t('votes') }}
 				</p>
 				<span class="bar">
 					<span
@@ -22,15 +22,15 @@
 			</div>
 		</div>
 
-		<span class="btn small outline" @click="getVotes"
-			>Ergebnisse aktualisieren</span
-		>
+		<span class="btn small outline" @click="getVotes">{{
+			$t('refresh_result')
+		}}</span>
 
 		<p
 			class="color-light-grey change-view"
 			@click="$emit('change-view', 'survey')"
 		>
-			zur Umfrage
+			{{ $t('to_survey') }}
 		</p>
 	</div>
 </template>

@@ -9,6 +9,9 @@ export default {
 	getSurvey(uuid) {
 		return axios.get(url + uuid).then(response => response.data);
 	},
+	getSurveys() {
+		return axios.get(url).then(response => response.data);
+	},
 	vote(uuid, answers) {
 		return axios
 			.post(url + uuid, { answers })
