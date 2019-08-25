@@ -56,6 +56,11 @@ export default {
 		padding: 10px 20px;
 		font-size: 1em;
 		border: 2px solid var(--lighter-grey);
+
+		&:focus,
+		&:hover {
+			border: 2px solid var(--main-color);
+		}
 	}
 }
 .answer-container {

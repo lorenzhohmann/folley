@@ -24,6 +24,7 @@
 	"allow_multiple_choices": "Mehrfach-Auswahl erlauben",
 	"your_name": "Dein Name",
 	"votet_for": "Für diese Option haben diese Leute gestimmt:",
+	"no_voters": "Für diese Option hat noch keiner gestimmt.",
 	"alerts": {
 		"no_question": "Bitte gebe eine Frage ein!",
 		"no_answers": "Es müssen mindestens zwei Antworten vorhanden sein!",

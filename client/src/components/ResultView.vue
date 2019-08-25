@@ -24,9 +24,16 @@
 					>
 				</span>
 				<div class="voter" v-if="showVoter == vote.id">
-					<span class="close-voters" @click="showVoter = 0">x</span>
-					<span class="fake-hl">{{ $t('votet_for') }}</span>
-					<p v-for="name in vote.names">{{ name }}</p>
+					<div class="no-votes" v-if="vote.votes == 0">
+						{{ $t('no_voters') }}
+					</div>
+					<div class="has-votes" v-if="vote.votes > 0">
+						<span class="close-voters" @click="showVoter = 0"
+							>x</span
+						>
+						<span class="fake-hl">{{ $t('votet_for') }}</span>
+						<p v-for="name in vote.names">{{ name }}</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -72,8 +79,6 @@ export default {
 				vote.percent =
 					Math.round((100 / this.totalVotes) * vote.votes * 10) / 10;
 			});
-
-			console.log(this.votes);
 		},
 		showVoters(answerID) {
 			this.showVoter = answerID == this.showVoter ? 0 : answerID;
@@ -97,6 +102,10 @@ export default {
 	padding: 1rem;
 	flex-wrap: wrap;
 	position: relative;
+
+	div {
+		width: 100%;
+	}
 
 	.close-voters {
 		position: absolute;
