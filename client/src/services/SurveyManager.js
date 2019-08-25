@@ -12,9 +12,9 @@ export default {
 	getSurveys() {
 		return axios.get(url).then(response => response.data);
 	},
-	vote(uuid, answers) {
+	vote(uuid, name, answers) {
 		return axios
-			.post(url + uuid, { answers })
+			.post(url + uuid, { name, answers })
 			.then(response => response.data);
 	},
 	getVotes(uuid) {

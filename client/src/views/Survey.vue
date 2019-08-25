@@ -48,8 +48,18 @@ export default {
 </script>
 
 <style lang="scss">
+.name-container {
+	margin: 2rem 0;
+	width: 50%;
+
+	input {
+		padding: 10px 20px;
+		font-size: 1em;
+		border: 2px solid var(--lighter-grey);
+	}
+}
 .answer-container {
-	margin: 3rem 0;
+	margin: 1rem 0;
 
 	.row {
 		display: flex;

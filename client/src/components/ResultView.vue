@@ -8,17 +8,26 @@
 					<b>{{ vote.answer }}</b
 					>: {{ vote.votes }} {{ $t('votes') }}
 				</p>
-				<span class="bar">
+				<span class="bar" @click="showVoters(vote.id)">
 					<span
 						class="progress"
 						v-bind:style="'width:' + vote.percent + '%'"
 					></span>
 					<span
 						class="percent-value"
-						v-bind:style="'left:' + (vote.percent + 1) + '%'"
+						v-bind:style="
+							'left:' +
+								(vote.percent > 50 ? 1 : vote.percent + 1) +
+								'%'
+						"
 						>{{ vote.percent }} %</span
 					>
 				</span>
+				<div class="voter" v-if="showVoter == vote.id">
+					<span class="close-voters" @click="showVoter = 0">x</span>
+					<span class="fake-hl">{{ $t('votet_for') }}</span>
+					<p v-for="name in vote.names">{{ name }}</p>
+				</div>
 			</div>
 		</div>
 
@@ -43,7 +52,8 @@ export default {
 	data() {
 		return {
 			votes: [],
-			totalVotes: 0
+			totalVotes: 0,
+			showVoter: 0
 		};
 	},
 	async created() {
@@ -58,10 +68,15 @@ export default {
 			this.votes.map(vote => (this.totalVotes += vote.votes));
 
 			// calc percent values
-			this.votes.forEach(vote => {
+			this.votes.forEach(async vote => {
 				vote.percent =
 					Math.round((100 / this.totalVotes) * vote.votes * 10) / 10;
 			});
+
+			console.log(this.votes);
+		},
+		showVoters(answerID) {
+			this.showVoter = answerID == this.showVoter ? 0 : answerID;
 		}
 	}
 };
@@ -72,7 +87,36 @@ export default {
 	margin: 3rem 0;
 
 	.answer {
-		margin: 1rem 0;
+		margin: 2rem 0;
+	}
+}
+.voter {
+	border: 2px solid;
+	display: flex;
+	border-top: none;
+	padding: 1rem;
+	flex-wrap: wrap;
+	position: relative;
+
+	.close-voters {
+		position: absolute;
+		cursor: pointer;
+		top: 5px;
+		right: 10px;
+		font-weight: bold;
+	}
+
+	.fake-hl {
+		width: 100%;
+		margin-bottom: 1rem;
+		padding-left: 1rem;
+		font-weight: 600;
+		color: var(--grey);
+	}
+
+	p {
+		width: 20%;
+		padding: 0.5rem 1rem;
 	}
 }
 .bar {

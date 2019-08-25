@@ -22,6 +22,8 @@
 	"data_privacy": "Datenschutzerklärung",
 	"blog": "Blog",
 	"allow_multiple_choices": "Mehrfach-Auswahl erlauben",
+	"your_name": "Dein Name",
+	"votet_for": "Für diese Option haben diese Leute gestimmt:",
 	"alerts": {
 		"no_question": "Bitte gebe eine Frage ein!",
 		"no_answers": "Es müssen mindestens zwei Antworten vorhanden sein!",
@@ -29,6 +31,7 @@
 		"min_one_answer": "Bitte wähle mindestens eine Antwort aus!",
 		"vote_success": "Du hast erfolgreich abgestimmt!",
 		"default_error": "Fehler! Bitte versuche es in ein paar Minuten erneut!",
-		"already_voted": "Du hast bereits abgestimmt!"
+		"already_voted": "Du hast bereits abgestimmt!",
+		"no_name": "Bitte gebe Deinen Namen an!"
 	}
 }

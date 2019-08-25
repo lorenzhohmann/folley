@@ -105,20 +105,45 @@ router.post('/survey', (req, res) => {
 router.get('/survey/:surveyID/votes', (req, res) => {
 	const surveyID = req.params.surveyID;
 
+	let votes = [];
+
 	db.query(
 		`SELECT a.id, answer, COUNT(v.id) votes FROM answers a JOIN surveys s ON a.survey_id = s.id JOIN votes v ON v.answer_id = a.id WHERE s.id = '${surveyID}' GROUP BY a.id`,
-		(err, result) => {
-			res.status(200).send(result);
+		async (err, result) => {
+			for (let i = 0; i < result.length; i++) {
+				let row = result[i];
+				row.names = [];
+
+				let voter = await getVoter(row['id']);
+				for (let j = 0; j < voter.length; j++) {
+					row.names.push(voter[j].name);
+				}
+
+				votes.push(row);
+			}
+			res.status(200).send(votes);
 		}
 	);
 });
 
+function getVoter(answerID) {
+	return new Promise((resolve, reject) => {
+		db.query(
+			`SELECT name FROM votes WHERE answer_id = ${answerID}`,
+			(subErr, subResult) => {
+				resolve(subResult);
+			}
+		);
+	});
+}
+
 router.post('/survey/:surveyID', (req, res) => {
 	const answers = req.body.answers;
+	const name = req.body.name;
 
 	for (let i = 0; i < answers.length; i++) {
 		db.query(
-			`INSERT INTO votes (ip, answer_id) VALUES ('xxx.xxx.xxx.xxx', ${answers[i]})`
+			`INSERT INTO votes (ip, name, answer_id) VALUES ('xxx.xxx.xxx.xxx', '${name}', ${answers[i]})`
 		);
 	}
 

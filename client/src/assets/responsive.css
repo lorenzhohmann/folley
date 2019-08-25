@@ -34,9 +34,24 @@
 	.home section:first-child {
 		height: 70vh;
 	}
+	.name-container {
+		width: 100%;
+	}
+	.voter p {
+		width: 50%;
+	}
 }
 
 @media screen and (max-width: 480px) {
+	h1 {
+		font-size: 2.2em;
+	}
+	.voter p {
+		width: 100%;
+	}
+	h2 {
+		font-size: 1em;
+	}
 	footer {
 		flex-direction: column;
 		width: 100vw;

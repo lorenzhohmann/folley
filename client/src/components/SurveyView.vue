@@ -4,6 +4,9 @@
 			{{ $t('created') }} {{ survey.created_date }} {{ $t('at') }}
 			{{ survey.created_time }} {{ $t('clock') }}
 		</h3>
+		<div class="name-container">
+			<input type="text" v-model="name" :placeholder="$t('your_name')" />
+		</div>
 		<div class="answer-container">
 			<div class="row" v-for="answer in survey.answers">
 				<input
@@ -49,6 +52,7 @@ export default {
 	data() {
 		return {
 			alert: [],
+			name: '',
 			checkedAnswers: []
 		};
 	},
@@ -56,6 +60,10 @@ export default {
 		vote: async function() {
 			if (this.checkedAnswers.length == 0) {
 				this.setAlert('alerts.min_one_answer', 'red');
+				return false;
+			}
+			if (this.name == '') {
+				this.setAlert('alerts.no_name', 'red');
 				return false;
 			}
 			if (this.getCookie('voted-' + this.uuid) === 'true') {
@@ -66,6 +74,7 @@ export default {
 			try {
 				const response = await SurveyManager.vote(
 					this.uuid,
+					this.name,
 					this.checkedAnswers
 				);
 				this.setAlert('alerts.vote_success');
